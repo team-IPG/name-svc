@@ -8,7 +8,7 @@ on:
 env:
   PROJECT_ID: ${{ secrets.RUN_PROJECT }}
   RUN_REGION: us-central1
-  SERVICE_NAME: my-service
+  SERVICE_NAME: name-svc
 
 jobs:
   setup-build-deploy:
