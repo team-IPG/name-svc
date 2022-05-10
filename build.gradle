@@ -35,6 +35,15 @@ java {
 	}
 }
 
+bootJar {
+	// generate non-versioned boot jar
+	archiveFileName.set("${rootProject.name}.jar")
+}
+
+tasks.named("jar") {
+	// don't generate plain jar
+	enabled = false
+}
 tasks.named('test') {
 	useJUnitPlatform()
 }
