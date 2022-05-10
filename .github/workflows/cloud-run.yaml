@@ -29,15 +29,15 @@ jobs:
         run: |-
           gcloud builds submit \
             --config ./cloudbuild.yaml \
-            --substitutions=_SERVICE_NAME=$SERVICE_NAME,_COMMIT_SHA=$github.sha \
+            --substitutions=_SERVICE_NAME=$SERVICE_NAME,_COMMIT_SHA=${{ github.sha }} \
             ./
 
       - name: 'Deploy to Cloud Run'
         uses: 'google-github-actions/deploy-cloudrun@v0'
         with:
-          image: "gcr.io/$PROJECT_ID/$SERVICE_NAME:COMMIT_SHA"
-          service: '${SERVICE_NAME }}'
-          region: '${RUN_REGION }}'
+          image: 'gcr.io/$PROJECT_ID/$SERVICE_NAME:${{ github.sha }}'
+          service: '${SERVICE_NAME}'
+          region: '${RUN_REGION}'
           env_vars: 'NAME="test"'
 
       - name: 'Use output'
