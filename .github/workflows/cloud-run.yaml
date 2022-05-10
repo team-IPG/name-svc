@@ -7,8 +7,8 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.RUN_PROJECT }}
-  _RUN_REGION: us-central1
-  _SERVICE_NAME: name-svc
+  RUN_REGION: us-central1
+  SERVICE_NAME: name-svc
 
 jobs:
   setup-build-deploy:
@@ -29,14 +29,15 @@ jobs:
         run: |-
           gcloud builds submit \
             --config ./cloudbuild.yaml \
+            --substitutions=_SERVICE_NAME=$SERVICE_NAME \
             ./
 
       - name: 'Deploy to Cloud Run'
         uses: 'google-github-actions/deploy-cloudrun@v0'
         with:
-          image: "gcr.io/$PROJECT_ID/$_SERVICE_NAME:COMMIT_SHA"
-          service: '${_SERVICE_NAME }}'
-          region: '${_RUN_REGION }}'
+          image: "gcr.io/$PROJECT_ID/$SERVICE_NAME:COMMIT_SHA"
+          service: '${SERVICE_NAME }}'
+          region: '${RUN_REGION }}'
           env_vars: 'NAME="test"'
 
       - name: 'Use output'
