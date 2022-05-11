@@ -6,8 +6,11 @@ load name data and emit name events
 - [github action](https://cloud.google.com/community/tutorials/cicd-cloud-run-github-actions)
 
 ## local options
-- [test emulator](https://cloud.google.com/pubsub/docs/emulator)
-- [pub/sub config](https://docs.spring.io/spring-cloud-gcp/docs/current/reference/html/#spring-cloud-gcp-pubsub-api-configuration)
+- [gcp pub/sub test emulator](https://cloud.google.com/pubsub/docs/emulator)
+
+## tech
+- [yugabyte support](https://github.com/yugabyte/spring-data-yugabytedb)
+- [gcp pub/sub](https://docs.spring.io/spring-cloud-gcp/docs/current/reference/html/#spring-cloud-gcp-pubsub-api-configuration)
 
 ## input options
 - MultiPartFile upload
