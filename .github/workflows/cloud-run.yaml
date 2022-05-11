@@ -63,6 +63,3 @@ jobs:
             --min-instances ${{ env.MIN_INSTANCES }} \
             --platform "managed" \
         # --quiet
-
-      - name: 'Use output'
-        run: 'curl "${{ steps.deploy.outputs.url }}"'
