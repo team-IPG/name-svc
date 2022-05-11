@@ -18,7 +18,7 @@ ext {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'com.google.cloud:spring-cloud-gcp-starter-pubsub'
+	//implementation 'com.google.cloud:spring-cloud-gcp-starter-pubsub'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
