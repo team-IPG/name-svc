@@ -62,7 +62,7 @@ jobs:
             --memory ${{ env.MEMORY }} \
             --min-instances ${{ env.MIN_INSTANCES }} \
             --platform "managed" \
-            --quiet
+            --
 
       - name: 'Use output'
-          run: 'curl "${{ steps.deploy.outputs.url }}"'
+        run: 'curl "${{ steps.deploy.outputs.url }}"'
