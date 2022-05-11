@@ -54,6 +54,8 @@ jobs:
         run: |-
           gcloud run deploy ${{ env.SERVICE }} \
             --region ${{ env.REGION }} \
+            --allow-unauthenticated \
             --image gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{  github.sha }} \
+            --memory 512Mi \
             --platform "managed" \
             --quiet
