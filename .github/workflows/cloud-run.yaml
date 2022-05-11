@@ -53,6 +53,7 @@ jobs:
           docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{  github.sha }}
 
       - name: Deploy to Cloud Run
+        id: deploy
         run: |-
           gcloud run deploy ${{ env.SERVICE }} \
             --region ${{ env.REGION }} \
@@ -62,3 +63,6 @@ jobs:
             --min-instances ${{ env.MIN_INSTANCES }} \
             --platform "managed" \
             --quiet
+
+      - name: 'Use output'
+          run: 'curl "${{ steps.deploy.outputs.url }}"'
