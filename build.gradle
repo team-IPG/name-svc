@@ -21,11 +21,14 @@ dependencies {
 	implementation ('com.google.cloud:spring-cloud-gcp-starter-pubsub') {
 		exclude group: 'io.grpc', module: 'grpc-netty-shaded'
 	}
+	// switching away from netty-shaded addresses defect with netty grpc
+	// https://stackoverflow.com/questions/71920265/jvm-crashes-while-authenticating-pub-sub
 	implementation 'io.grpc:grpc-netty'
+
+	// test dependencies
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.hamcrest:hamcrest-library'
 }
-// switching away from netty-shaded addresses defect with netty grpc
-// https://stackoverflow.com/questions/71920265/jvm-crashes-while-authenticating-pub-sub
 
 dependencyManagement {
 	imports {
