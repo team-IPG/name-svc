@@ -10,6 +10,8 @@ env:
   REGION: us-central1
   SERVICE: name-svc
   ARTIFACT: name-svc.jar
+  MIN_INSTANCES: 1
+  MEMORY: 512Mi
 
 jobs:
   setup-build-deploy:
@@ -56,6 +58,7 @@ jobs:
             --region ${{ env.REGION }} \
             --allow-unauthenticated \
             --image gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{  github.sha }} \
-            --memory 512Mi \
+            --memory ${{ env.MEMORY }} \
+            --min-instances ${{ env.MIN_INSTANCES }} \
             --platform "managed" \
             --quiet
