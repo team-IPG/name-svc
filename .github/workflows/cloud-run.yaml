@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  PROJECT_ID: ${{ secrets.RUN_PROJECT }}
+  PROJECT_ID: ${{ secrets.GCP_PROJECT }}
   REGION: us-central1
   SERVICE: name-svc
 
