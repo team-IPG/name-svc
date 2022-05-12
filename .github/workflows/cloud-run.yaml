@@ -38,7 +38,12 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Assemble JAR
-        run: ./gradlew assemble
+        run: ./gradlew build
+
+      - name: Generate JaCoCo Badge
+        uses: cicirello/jacoco-badge-generator@v2
+        with:
+          jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
 
       - id: 'auth'
         uses: 'google-github-actions/auth@v0'
