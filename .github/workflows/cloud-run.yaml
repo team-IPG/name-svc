@@ -45,13 +45,14 @@ jobs:
         with:
           jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
 
-# TODO: make this work
-#      - name: Commit and push JaCoCo badge (if changed)
-#        uses: EndBug/add-and-commit@v7
-#        with:
-#          # default_author: github_actions
-#          message: 'commit badge'
-#          add: '*.svg'
+      - name: Commit and push JaCoCo badge (if changed)
+        uses: EndBug/add-and-commit@v7
+        with:
+          committer_name: jglynn
+          committer_email: john.a.glynn@gmail.com
+          # default_author: github_actions
+          message: 'commit badge'
+          add: '*.svg'
 
       - name: Upload JaCoCo coverage report
         uses: actions/upload-artifact@v2
