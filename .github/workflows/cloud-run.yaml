@@ -33,7 +33,9 @@ jobs:
           java-version: 17
           distribution: 'adopt'
 
-      - name: Assemble with Gradle
+      # Use the gradle-build-action which caches by default
+      - name: Assemble JAR
+        uses: gradle/gradle-build-action@v2
         run: ./gradlew assemble
 
       - id: 'auth'
