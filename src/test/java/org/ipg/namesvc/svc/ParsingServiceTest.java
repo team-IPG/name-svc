@@ -18,20 +18,22 @@ class ParsingServiceTest {
 
     private final ParsingService parsingService = new ParsingService();
 
-    private NameRecord expectedNameRecord1;
-    private NameRecord expectedNameRecord2;
+    private NameRecord expectedName1;
+    private NameRecord expectedName2;
+    private NameRecord expectedName3;
 
     @BeforeEach
     void setup() {
-         expectedNameRecord1 = new NameRecord("joe", "doe", "1234");
-         expectedNameRecord2 = new NameRecord("jane", "doe", "5678");
+        expectedName1 = new NameRecord("Abdullah", "Khan", "Aby");
+        expectedName2 = new NameRecord("Sanja", "Kon", "Sanja");
+        expectedName3 = new NameRecord("Jose", "Aldo", "Jose");
     }
 
     @Test
     void parse() {
-        String line = "joe, doe, 1234";
+        String line = "Abdullah, Khan, Aby";
         NameRecord testNameRecord = parsingService.parseLine(line);
-        assertEquals(expectedNameRecord1, testNameRecord);
+        assertEquals(expectedName1, testNameRecord);
     }
 
     @Test
@@ -39,8 +41,9 @@ class ParsingServiceTest {
         InputStream is = this.getClass().getResourceAsStream("/simple_names.csv");
         MultipartFile file = new MockMultipartFile("simple_names.csv", is);
         List<NameRecord> names = parsingService.parse(file);
-        assertEquals(2, names.size());
-        assertThat(names, hasItem(expectedNameRecord1));
-        assertThat(names, hasItem(expectedNameRecord2));
+        assertEquals(3, names.size());
+        assertThat(names, hasItem(expectedName1));
+        assertThat(names, hasItem(expectedName2));
+        assertThat(names, hasItem(expectedName3));
     }
 }
