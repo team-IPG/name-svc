@@ -23,7 +23,6 @@ public class YsqlDbConfig extends AbstractYugabyteJdbcConfiguration {
 
 	@Bean
 	DataSource dataSource() {
-		//NOTE: Load balancing doesn't seem to be working
 		String hostName = "20.119.89.195";
 		String port = "5433";
 		Properties poolProperties = new Properties();
@@ -34,7 +33,7 @@ public class YsqlDbConfig extends AbstractYugabyteJdbcConfiguration {
 		poolProperties.setProperty("dataSource.databaseName", "yugabyte");
 		poolProperties.setProperty("dataSource.user", "yugabyte");
 		poolProperties.setProperty("dataSource.password", "Hackathon22!");
-		//poolProperties.setProperty("dataSource.loadBalance", "true");
+		//poolProperties.setProperty("dataSource.loadBalance", "false"); //LB is not working
 		poolProperties.setProperty("dataSource.additionalEndpoints",
 				"20.62.193.167:5433,20.121.115.88:5433");
 		HikariConfig hikariConfig = new HikariConfig(poolProperties);
