@@ -18,12 +18,20 @@ ext {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// deps for GCP including Pub/Sub
 	implementation ('com.google.cloud:spring-cloud-gcp-starter-pubsub') {
 		exclude group: 'io.grpc', module: 'grpc-netty-shaded'
 	}
 	// switching away from netty-shaded addresses defect with netty grpc
 	// https://stackoverflow.com/questions/71920265/jvm-crashes-while-authenticating-pub-sub
 	implementation 'io.grpc:grpc-netty'
+
+	// deps for yugabyte
+	implementation 'com.yugabyte:spring-data-yugabytedb-ysql:2.3.0'
+	implementation 'com.yugabyte:jdbc-yugabytedb:42.3.0'
+	implementation 'com.zaxxer:HikariCP'
+	implementation 'org.postgresql:postgresql'
 
 	// test dependencies
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

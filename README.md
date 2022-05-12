@@ -45,5 +45,5 @@ The `bootRun` task will build the project using Gradle wrapper and start the Spr
 - Cloud Storage event
 
 ## output
-- insert/update name records in `db`
-- publish `name` event to topic
+- insert/update name records in `yugabyte db`
+- publish `name-update` event to gcp pub/sub `name-update-topic`
