@@ -43,7 +43,7 @@ public class PubSubService {
          this.pubSubAdmin.createTopic(topicName);
     }
 
-    public void createSubscription(String topicName, String subscriptionName) {
+    public void createSubscription(String subscriptionName, String topicName) {
         this.pubSubAdmin.createSubscription(subscriptionName, topicName);
     }
 
