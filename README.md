@@ -1,5 +1,8 @@
 # name-svc
-load name data and emit name events
+
+![Coverage](.github/badges/jacoco.svg)
+
+service responsible for loading name data emitting events for voice generation
 
 ## pre-requisite
 
@@ -39,6 +42,7 @@ The `bootRun` task will build the project using Gradle wrapper and start the Spr
 ## tech
 - [yugabyte support](https://github.com/yugabyte/spring-data-yugabytedb)
 - [gcp pub/sub](https://docs.spring.io/spring-cloud-gcp/docs/current/reference/html/#spring-cloud-gcp-pubsub-api-configuration)
+
 
 ## input options
 - MultiPartFile upload
