@@ -34,7 +34,10 @@ public class ParsingService {
 
     protected EmployeeDTO parseLine(String line) {
         String[] parts = line.split(",");
-        return new EmployeeDTO(parts[0].trim(), parts[1].trim(), parts[2].trim());
+        return new EmployeeDTO(
+                parts[0].trim(),
+                parts[1].trim(),
+                parts[2].trim());
     }
 
 }

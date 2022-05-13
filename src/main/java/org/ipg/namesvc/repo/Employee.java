@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Version;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Table("employee_test")
 public class Employee {
@@ -27,7 +28,7 @@ public class Employee {
     private String preferredName;
 
     // Valid = in specific Enumeration list?
-    private String preferredStyle;
+    private String preferredPreset;
 
     // Valid = 1 to 5 ?
     private Integer preferredSpeed;
@@ -76,12 +77,12 @@ public class Employee {
         this.preferredName = preferredName;
     }
 
-    public String getPreferredStyle() {
-        return preferredStyle;
+    public String getPreferredPreset() {
+        return preferredPreset;
     }
 
-    public void setPreferredStyle(String preferredStyle) {
-        this.preferredStyle = preferredStyle;
+    public void setPreferredPreset(String preferredPreset) {
+        this.preferredPreset = preferredPreset;
     }
 
     public Integer getPreferredSpeed() {
@@ -124,4 +125,16 @@ public class Employee {
         this.updated = updated;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return id.equals(employee.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
