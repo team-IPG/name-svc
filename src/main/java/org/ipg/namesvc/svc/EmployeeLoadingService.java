@@ -1,8 +1,8 @@
 package org.ipg.namesvc.svc;
 
-import org.ipg.namesvc.dto.NameRecord;
+import org.ipg.namesvc.dto.EmployeeDTO;
 import org.ipg.namesvc.repo.Employee;
-import org.ipg.namesvc.repo.NameYsqlRepository;
+import org.ipg.namesvc.repo.EmployeeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -15,23 +15,23 @@ import java.util.Optional;
 import static java.util.stream.Collectors.toList;
 
 @Service
-public class NameService {
+public class EmployeeLoadingService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(NameService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeLoadingService.class);
 
-    private final NameYsqlRepository nameRepo;
+    private final EmployeeRepository nameRepo;
 
     private final ParsingService parsingService;
 
-    public NameService(ParsingService parsingService,
-                       NameYsqlRepository nameRepo) {
+    public EmployeeLoadingService(ParsingService parsingService,
+                                  EmployeeRepository nameRepo) {
         this.nameRepo = nameRepo;
         this.parsingService = parsingService;
     }
 
     public void processNamesFile(MultipartFile file) {
         // parse contents
-        List<NameRecord> nameRecords = parsingService.parse(file);
+        List<EmployeeDTO> nameRecords = parsingService.parse(file);
 
         // create or update Employee records in DB
         List<Employee> employees = nameRecords
@@ -50,7 +50,7 @@ public class NameService {
      * @param name data from CSV file
      * @return persisted Employee
      */
-    private Employee createOrUpdateEmployee(NameRecord name) {
+    private Employee createOrUpdateEmployee(EmployeeDTO name) {
         String id = name.firstName() + "-" + name.lastName();
         Optional<Employee> existingEmployee = nameRepo.findById(id);
         Employee employee = existingEmployee.orElse( new Employee(id,true, LocalDateTime.now()) );

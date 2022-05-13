@@ -1,6 +1,6 @@
 package org.ipg.namesvc.svc;
 
-import org.ipg.namesvc.dto.NameRecord;
+import org.ipg.namesvc.dto.EmployeeDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class ParsingService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ParsingService.class);
 
-    public List<NameRecord> parse(MultipartFile file) {
+    public List<EmployeeDTO> parse(MultipartFile file) {
         try (InputStream inputStream = file.getInputStream()) {
             return new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
                     .lines()
@@ -32,9 +32,9 @@ public class ParsingService {
         return Collections.emptyList();
     }
 
-    protected NameRecord parseLine(String line) {
+    protected EmployeeDTO parseLine(String line) {
         String[] parts = line.split(",");
-        return new NameRecord(parts[0].trim(), parts[1].trim(), parts[2].trim());
+        return new EmployeeDTO(parts[0].trim(), parts[1].trim(), parts[2].trim());
     }
 
 }
