@@ -5,6 +5,7 @@ import org.ipg.namesvc.repo.Employee;
 import org.ipg.namesvc.repo.EmployeeRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
@@ -39,6 +40,7 @@ public class EmployeeController {
             throw new IllegalArgumentException("Employee does not exist with id = " + id);
         }
         Employee updatedEmployee = updatePreferences(employeeDTO, employee.get());
+        updatedEmployee.setUpdated(LocalDateTime.now());
         repository.save(updatedEmployee);
         return from(updatedEmployee);
     }
