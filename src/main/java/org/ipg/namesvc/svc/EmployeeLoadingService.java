@@ -57,7 +57,7 @@ public class EmployeeLoadingService {
         employee.setFirstName(name.firstName());
         employee.setLastName((name.lastName()));
         employee.setPreferredName(name.preferredName());
-        employee.setPreferredSpeed(3);
+        employee.setPreferredSpeed(1.0d);
         employee.setPreferredPreset("US");
         employee.setVoiceLink("tbd");
         employee.setUpdated(LocalDateTime.now());

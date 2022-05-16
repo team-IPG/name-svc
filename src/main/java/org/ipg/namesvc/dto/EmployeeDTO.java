@@ -5,7 +5,7 @@ public record EmployeeDTO(
         String lastName,
         String preferredName,
         String preferredPreset,
-        Integer preferredSpeed,
+        Double preferredSpeed,
         boolean active) {
 
     public EmployeeDTO(String firstName, String lastName, String preferredName) {

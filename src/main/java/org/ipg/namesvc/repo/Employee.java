@@ -31,7 +31,7 @@ public class Employee {
     private String preferredPreset;
 
     // Valid = 1 to 5 ?
-    private Integer preferredSpeed;
+    private Double preferredSpeed;
 
     // URL Reference to object storage location of voice file
     private String voiceLink;
@@ -85,11 +85,11 @@ public class Employee {
         this.preferredPreset = preferredPreset;
     }
 
-    public Integer getPreferredSpeed() {
+    public Double getPreferredSpeed() {
         return preferredSpeed;
     }
 
-    public void setPreferredSpeed(Integer preferredSpeed) {
+    public void setPreferredSpeed(Double preferredSpeed) {
         this.preferredSpeed = preferredSpeed;
     }
 
