@@ -21,7 +21,7 @@ public class EmployeeController {
         this.repository = repository;
     }
 
-    @GetMapping("employee/{id}")
+    @GetMapping("/employee/{id}")
     public EmployeeDTO getEmployee(@PathVariable String id) {
         Optional<Employee> employee = repository.findById(id);
         if (employee.isPresent()) {
@@ -45,7 +45,7 @@ public class EmployeeController {
         return from(updatedEmployee);
     }
 
-    @GetMapping("employee")
+    @GetMapping("/employee")
     Collection<EmployeeDTO> getAllEmployees() {
         Iterable<Employee> employees = repository.findAll();
         return StreamSupport.stream(employees.spliterator(), false)
@@ -53,7 +53,7 @@ public class EmployeeController {
                 .toList();
     }
 
-    @GetMapping("findEmployee/{searchTerm}")
+    @GetMapping("/findEmployee/{searchTerm}")
     Collection<EmployeeDTO> findEmployee(@PathVariable String searchTerm) {
         Set<Employee> employees = new HashSet<>();
         employees.addAll(repository.findByIdStartingWithIgnoreCase(searchTerm));
