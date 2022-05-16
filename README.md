@@ -2,9 +2,99 @@
 
 ![Coverage](.github/badges/jacoco.svg)
 
-service responsible for loading name data emitting events for voice generation
+services responsible for loading name data emitting events for voice generation
 
-## pre-requisite
+## REST APIs
+
+### Update Status
+
+GET ```/employee/{id}/status/{true/false}```
+
+Example: De-activate a user with id = `Jose-Aldo` (aka 'opt-out')
+
+```/employee/Jose-Aldo/status/false```
+
+Example: Activate a user with id = `Jose-Aldo`
+
+```/employee/Jose-Aldo/status/false```
+
+### Find Users (by id, firstname or lastname)
+
+GET ```/findEmployee/{search-term}```
+
+Example: Find all users with an id or firstname or lastname that begins with `jo`
+
+```/findEmployee/jo```
+
+Result:
+```json
+[
+    {
+        "firstName": "Jose",
+        "lastName": "Aldo",
+        "preferredName": "ho-say",
+        "preferredPreset": "PRESET_2",
+        "preferredSpeed": 1,
+        "active": true
+    },
+    {
+        "firstName": "Jose",
+        "lastName": "Luis",
+        "preferredName": "Joseph",
+        "preferredPreset": "PRESET_1",
+        "preferredSpeed": 1,
+        "active": true
+    }
+]
+
+```
+
+### Get User Details
+
+GET ```/employee/{id}```
+
+Example: Get user details for user with id = `Jose-Aldo`
+
+```/employee/Jose-Aldo```
+
+Result:
+```json
+{
+    "firstName": "Jose",
+    "lastName": "Aldo",
+    "preferredName": "ho-say",
+    "preferredPreset": "PRESET_2",
+    "preferredSpeed": 1,
+    "active": true
+}
+```
+
+### Update User Preferences
+
+POST `/employeePreferences/{id}`
+
+BODY:
+```json
+{
+   "preferredName": <preferred_name_string>,
+   "preferredPreset": <preset_name_string>,
+   "preferredSpeed": <decimal>
+}
+```
+
+Example: Update preferences for user with id = `Jose-Aldo`
+
+Example BODY:
+```json
+{
+   "preferredName": "jo-say",
+   "preferredPreset": "PRESET_4",
+   "preferredSpeed": 1.2
+}
+```
+
+
+## Local Run: Pre-Requisites
 
 Download [GCP credentials json file](https://github.com/team-IPG/foundation/blob/main/key.json) and store on your machine
 
@@ -12,7 +102,7 @@ Download [GCP credentials json file](https://github.com/team-IPG/foundation/blob
 # example
 /Users/john/key.json
 ```
-## run name-svc from terminal
+## Local Run: Gradle Wrapper & terminal
 
 Execute the gradle wrapper bootRun task, passing location to gcp json file
 ```bash
@@ -30,8 +120,6 @@ Using gradle features of your IDE,
 3. Run the `bootRun` task
 
 The `bootRun` task will build the project using Gradle wrapper and start the Spring boot application on port 8080 (or whatever is specified in `application.yml` for `server.port`)
-
-
 
 ## cicd options
 - [github action](https://cloud.google.com/community/tutorials/cicd-cloud-run-github-actions)

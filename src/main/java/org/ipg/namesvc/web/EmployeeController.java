@@ -3,7 +3,10 @@ package org.ipg.namesvc.web;
 import org.ipg.namesvc.dto.EmployeeDTO;
 import org.ipg.namesvc.repo.Employee;
 import org.ipg.namesvc.repo.EmployeeRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -12,8 +15,12 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.StreamSupport;
 
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+
 @RestController
 public class EmployeeController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeController.class);
 
     EmployeeRepository repository;
 
@@ -23,23 +30,25 @@ public class EmployeeController {
 
     @GetMapping("/employee/{id}")
     public EmployeeDTO getEmployee(@PathVariable String id) {
-        Optional<Employee> employee = repository.findById(id);
-        if (employee.isPresent()) {
-            return from(employee.get());
-        }
-        //TODO: how do we return a 404
-        throw new IllegalArgumentException("Employee does not exist with id = " + id);
+        return from(getEmployeeByIdOrThrow404(id));
+    }
+
+    @GetMapping("/employee/{id}/status/{active}")
+    public void updateEmployeeStatus(@PathVariable String id, @PathVariable Boolean active) {
+        LOGGER.info("Updating employee with id={}, status={}", id, active);
+        // Update employee status and update date
+        Employee employee = getEmployeeByIdOrThrow404(id);
+        employee.setActive(active);
+        employee.setUpdated(LocalDateTime.now());
+        repository.save(employee);
     }
 
     @PostMapping("/employeePreferences/{id}")
     public EmployeeDTO updateEmployeePreferences(
             @PathVariable String id,
             @RequestBody EmployeeDTO employeeDTO) {
-        Optional<Employee> employee = repository.findById(id);
-        if (employee.isEmpty()) {
-            throw new IllegalArgumentException("Employee does not exist with id = " + id);
-        }
-        Employee updatedEmployee = updatePreferences(employeeDTO, employee.get());
+        Employee employee = getEmployeeByIdOrThrow404(id);
+        Employee updatedEmployee = updatePreferences(employeeDTO, employee);
         updatedEmployee.setUpdated(LocalDateTime.now());
         repository.save(updatedEmployee);
         return from(updatedEmployee);
@@ -62,6 +71,14 @@ public class EmployeeController {
         return employees.stream()
                 .map(emp -> this.from(emp))
                 .toList();
+    }
+
+    private Employee getEmployeeByIdOrThrow404(String id) {
+        Optional<Employee> employee = repository.findById(id);
+        if (employee.isEmpty()) {
+            throw new ResponseStatusException(NOT_FOUND, "Unable to find employee with id=" + id);
+        }
+        return employee.get();
     }
 
     private EmployeeDTO from(Employee emp) {
