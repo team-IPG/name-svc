@@ -76,9 +76,9 @@ POST `/employeePreferences/{id}`
 BODY:
 ```json
 {
-   "preferredName": <preferred_name_string>,
-   "preferredPreset": <preset_name_string>,
-   "preferredSpeed": <decimal>
+   "preferredName": "<preferred_name_string>",
+   "preferredPreset": "<preset_name_string>",
+   "preferredSpeed": "<decimal>"
 }
 ```
 
@@ -89,7 +89,7 @@ Example BODY:
 {
    "preferredName": "jo-say",
    "preferredPreset": "PRESET_4",
-   "preferredSpeed": 1.2
+   "preferredSpeed": 1.0
 }
 ```
 
@@ -121,21 +121,9 @@ Using gradle features of your IDE,
 
 The `bootRun` task will build the project using Gradle wrapper and start the Spring boot application on port 8080 (or whatever is specified in `application.yml` for `server.port`)
 
-## cicd options
-- [github action](https://cloud.google.com/community/tutorials/cicd-cloud-run-github-actions)
-
-## local options
+## test libraries
 - [gcp pub/sub test emulator](https://cloud.google.com/pubsub/docs/emulator)
 
 ## tech
-- [yugabyte support](https://github.com/yugabyte/spring-data-yugabytedb)
+- [yugabyte](https://github.com/yugabyte/spring-data-yugabytedb)
 - [gcp pub/sub](https://docs.spring.io/spring-cloud-gcp/docs/current/reference/html/#spring-cloud-gcp-pubsub-api-configuration)
-
-
-## input options
-- MultiPartFile upload
-- Cloud Storage event
-
-## output
-- insert/update name records in `yugabyte db`
-- publish `name-update` event to gcp pub/sub `name-update-topic`
