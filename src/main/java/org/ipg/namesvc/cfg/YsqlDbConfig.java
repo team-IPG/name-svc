@@ -21,6 +21,14 @@ import java.util.Properties;
 @EnableYsqlRepositories(basePackageClasses = EmployeeRepository.class)
 public class YsqlDbConfig extends AbstractYugabyteJdbcConfiguration {
 
+	/**
+	 *  NOTE -- this is for a hackathon, if this were real we'd externalize these
+	 *  and managed credentials as secrets, etc.
+	 *
+	 *  This DB probably no longer exists by the time you're reading this message.
+	 *
+	 * @return a YGB datasource
+	 */
 	@Bean
 	DataSource dataSource() {
 		String hostName = "20.119.89.195";
