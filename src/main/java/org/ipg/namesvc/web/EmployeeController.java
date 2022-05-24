@@ -1,6 +1,6 @@
 package org.ipg.namesvc.web;
 
-import org.ipg.namesvc.dto.EmployeeDTO;
+import org.ipg.common.EmployeeDTO;
 import org.ipg.namesvc.repo.Employee;
 import org.ipg.namesvc.repo.EmployeeRepository;
 import org.slf4j.Logger;
@@ -83,6 +83,7 @@ public class EmployeeController {
 
     private EmployeeDTO from(Employee emp) {
         EmployeeDTO dto = new EmployeeDTO(
+                emp.getId(),
                 emp.getFirstName(),
                 emp.getLastName(),
                 emp.getPreferredName(),

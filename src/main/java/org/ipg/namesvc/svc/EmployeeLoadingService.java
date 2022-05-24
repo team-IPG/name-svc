@@ -1,6 +1,6 @@
 package org.ipg.namesvc.svc;
 
-import org.ipg.namesvc.dto.EmployeeDTO;
+import org.ipg.common.EmployeeDTO;
 import org.ipg.namesvc.repo.Employee;
 import org.ipg.namesvc.repo.EmployeeRepository;
 import org.slf4j.Logger;
@@ -51,17 +51,15 @@ public class EmployeeLoadingService {
      * @return persisted Employee
      */
     private Employee createOrUpdateEmployee(EmployeeDTO name) {
-        String id = name.firstName() + "-" + name.lastName();
-        Optional<Employee> existingEmployee = nameRepo.findById(id);
-        Employee employee = existingEmployee.orElse( new Employee(id,true, LocalDateTime.now()) );
+        Optional<Employee> existingEmployee = nameRepo.findById(name.id());
+        Employee employee = existingEmployee.orElse( new Employee(name.id(),true, LocalDateTime.now()) );
         employee.setFirstName(name.firstName());
         employee.setLastName((name.lastName()));
         employee.setPreferredName(name.preferredName());
-        employee.setPreferredSpeed(1.0d);
-        employee.setPreferredPreset("US");
-        employee.setVoiceLink("tbd");
+        employee.setPreferredSpeed(name.preferredSpeed());
+        employee.setPreferredPreset(name.preferredPreset());
+        employee.setVoiceLink("TBD");
         employee.setUpdated(LocalDateTime.now());
-        employee.setActive(true);
         LOGGER.info("Saving {} employee record = {}",
                 existingEmployee.isPresent() ? "existing" : "new", employee);
         return nameRepo.save(employee);

@@ -1,5 +1,6 @@
 package org.ipg.namesvc.repo;
 
+import org.ipg.common.VoicePreset;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.relational.core.mapping.Table;
@@ -28,7 +29,7 @@ public class Employee {
     private String preferredName;
 
     // Valid = in specific Enumeration list?
-    private String preferredPreset;
+    private VoicePreset preferredPreset;
 
     // Valid = 1 to 5 ?
     private Double preferredSpeed;
@@ -77,11 +78,11 @@ public class Employee {
         this.preferredName = preferredName;
     }
 
-    public String getPreferredPreset() {
+    public VoicePreset getPreferredPreset() {
         return preferredPreset;
     }
 
-    public void setPreferredPreset(String preferredPreset) {
+    public void setPreferredPreset(VoicePreset preferredPreset) {
         this.preferredPreset = preferredPreset;
     }
 

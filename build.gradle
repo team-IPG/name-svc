@@ -1,6 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.6.7'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id "com.google.cloud.artifactregistry.gradle-plugin" version "2.1.4"
 	id 'java'
 	id 'jacoco'
 }
@@ -10,6 +11,9 @@ version = '0.0.1-SNAPSHOT'
 
 repositories {
 	mavenCentral()
+	maven {
+		url "artifactregistry://us-central1-maven.pkg.dev/team-ipg-wf/ipg-repo"
+	}
 }
 
 ext {
@@ -18,7 +22,15 @@ ext {
 }
 
 dependencies {
+
+	implementation('org.ipg.common:common-data:1.0.1')
+
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.data:spring-data-jdbc'
+
+	// deps for accessing GCP Secrets
+	implementation 'com.google.cloud:spring-cloud-gcp-starter-secretmanager'
 
 	// deps for GCP including Pub/Sub
 	implementation ('com.google.cloud:spring-cloud-gcp-starter-pubsub') {
@@ -29,9 +41,13 @@ dependencies {
 	implementation 'io.grpc:grpc-netty'
 
 	// deps for yugabyte
-	implementation 'com.yugabyte:spring-data-yugabytedb-ysql:2.3.0'
-	//implementation 'com.yugabyte:jdbc-yugabytedb:42.3.0'
+	//implementation 'com.yugabyte:spring-data-yugabytedb-ysql:2.3.0'
+
+	// deps for GCP Cloud SQL
+	implementation 'com.google.cloud:spring-cloud-gcp-starter-sql-postgresql'
 	implementation 'com.zaxxer:HikariCP'
+	//implementation 'com.google.cloud.sql:postgres-socket-factory:1.6.0'
+	//implementation 'org.postgresql:postgresql:42.3.5'
 
 	// test dependencies
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

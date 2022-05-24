@@ -1,6 +1,7 @@
 package org.ipg.namesvc.svc;
 
-import org.ipg.namesvc.dto.EmployeeDTO;
+import org.ipg.common.EmployeeDTO;
+import org.ipg.common.VoicePreset;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockMultipartFile;
@@ -24,14 +25,16 @@ class ParsingServiceTest {
 
     @BeforeEach
     void setup() {
-        expectedName1 = new EmployeeDTO("Abdullah", "Khan", "Aby");
-        expectedName2 = new EmployeeDTO("Sanja", "Kon", "Sanja");
-        expectedName3 = new EmployeeDTO("Jose", "Aldo", "Jose");
+        VoicePreset defaultPreset = VoicePreset.valueOf(VoicePreset.DEFAULT_PRESET);
+        Double defaultRate = Double.valueOf(VoicePreset.DEFAULT_RATE);
+        expectedName1 = new EmployeeDTO("u01236","Abdullah", "Khan", "Aby", defaultPreset, defaultRate, true);
+        expectedName2 = new EmployeeDTO("u01234", "Sanja", "Kon", "Sanja", defaultPreset, defaultRate, true);
+        expectedName3 = new EmployeeDTO("u04567", "Jose", "Aldo", "Jose", defaultPreset, defaultRate, true);
     }
 
     @Test
     void parse() {
-        String line = "Abdullah, Khan, Aby";
+        String line = "u01236, Abdullah, Khan, Aby";
         EmployeeDTO testEmployeeDTO = parsingService.parseLine(line);
         assertEquals(expectedName1, testEmployeeDTO);
     }

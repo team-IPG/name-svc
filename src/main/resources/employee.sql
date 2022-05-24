@@ -12,8 +12,3 @@ CREATE TABLE IF NOT EXISTS employee_test
     active                  BOOLEAN NOT NULL,
     version                 INTEGER NOT NULL
 );
-
-
-ALTER TABLE employee_test RENAME preferred_speed TO pf_old;
-ALTER TABLE employee_test ADD preferred_speed NUMERIC (2, 1) NOT NULL;
-UPDATE employee_test set preferred_speed = 1.0 where 1=1;

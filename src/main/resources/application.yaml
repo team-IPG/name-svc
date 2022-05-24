@@ -6,3 +6,14 @@ server.port: ${PORT:8080}
 # Allow larger file limits for uploading
 spring.servlet.multipart.max-file-size: 128MB
 spring.servlet.multipart.max-request-size: 128MB
+
+spring:
+  datasource:
+    username: postgres
+    password: ${sm://employee-db-pwd}
+  cloud:
+    gcp:
+      sql:
+        database-name: postgres
+        instance-connection-name: team-ipg-wf:us-central1:employee-db
+        #  [gcp-project-id]:[region]:[instance-name]
