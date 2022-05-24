@@ -30,7 +30,9 @@ dependencies {
 	implementation 'org.springframework.data:spring-data-jdbc'
 
 	// deps for accessing GCP Secrets
-	implementation 'com.google.cloud:spring-cloud-gcp-starter-secretmanager'
+	implementation ('com.google.cloud:spring-cloud-gcp-starter-secretmanager'){
+		exclude group: 'io.grpc', module: 'grpc-netty-shaded'
+	}
 
 	// deps for GCP including Pub/Sub
 	implementation ('com.google.cloud:spring-cloud-gcp-starter-pubsub') {
