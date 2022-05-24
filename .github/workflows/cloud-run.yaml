@@ -7,6 +7,7 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT }}
+  SERVICE_ACCOUNT: ipg-service-account@${{ secrets.GCP_PROJECT }}.iam.gserviceaccount.com
   REGION: us-central1
   SERVICE: name-svc
   ARTIFACT: name-svc.jar
@@ -82,6 +83,7 @@ jobs:
             --region ${{ env.REGION }} \
             --allow-unauthenticated \
             --image gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{  github.sha }} \
+            --service-account=${{ env.SERVICE_ACCOUNT }} \
             --memory ${{ env.MEMORY }} \
             --min-instances ${{ env.MIN_INSTANCES }} \
             --platform "managed" \
