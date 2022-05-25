@@ -47,11 +47,12 @@ public class EmployeeController {
     public EmployeeDTO updateEmployeePreferences(
             @PathVariable String id,
             @RequestBody EmployeeDTO employeeDTO) {
+        LOGGER.info("Procedding preference update params={}", employeeDTO);
         Employee employee = getEmployeeByIdOrThrow404(id);
         Employee updatedEmployee = updatePreferences(employeeDTO, employee);
         updatedEmployee.setUpdated(LocalDateTime.now());
-        repository.save(updatedEmployee);
-        return from(updatedEmployee);
+        Employee persistedEmployee = repository.save(updatedEmployee);
+        return from(persistedEmployee);
     }
 
     @GetMapping("/employee")
